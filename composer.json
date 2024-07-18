@@ -1,11 +1,11 @@
 {
-    "name": "juniorfontenele/laravel-package",
-    "description": "Laravel package skeleton",
+    "name": "juniorfontenele/laravel-multitenancy",
+    "description": "Multi-tenancy support for Laravel",
     "keywords": [
-        "laravel",
-        "package-skeleton"
+        "juniorfontenele",
+        "laravel-multitenancy"
     ],
-    "homepage": "https://github.com/juniorfontenele/laravel-package-skeleton",
+    "homepage": "https://github.com/juniorfontenele/laravel-multitenancy",
     "license": "MIT",
     "authors": [
         {
@@ -36,18 +36,18 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src"
+            "JuniorFontenele\\LaravelMultitenancy\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "JuniorFontenele\\LaravelMultitenancy\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\Providers\\SkeletonServiceProvider"
+                "JuniorFontenele\\LaravelMultitenancy\\Providers\\LaravelMultitenancyServiceProvider"
             ],
             "dont-discover": [
                 "*"

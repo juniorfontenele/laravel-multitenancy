@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `:package_name` will be documented in this file.
+All notable changes to `laravel-multitenancy` will be documented in this file.
 
 ## v1.1.1 - 2024-07-18
 

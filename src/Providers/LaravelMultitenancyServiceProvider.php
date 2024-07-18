@@ -1,10 +1,10 @@
 <?php
 
-namespace VendorName\Skeleton\Providers;
+namespace JuniorFontenele\LaravelMultitenancy\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class SkeletonServiceProvider extends ServiceProvider
+class LaravelMultitenancyServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace JuniorFontenele\LaravelMultitenancy\Tests;
 
 use Illuminate\Config\Repository;
 use Illuminate\Database\Schema\Blueprint;
@@ -33,7 +33,7 @@ class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app)
     {
         return [
-            \VendorName\Skeleton\Providers\SkeletonServiceProvider::class,
+            \JuniorFontenele\LaravelMultitenancy\Providers\LaravelMultitenancyServiceProvider::class,
         ];
     }
 
