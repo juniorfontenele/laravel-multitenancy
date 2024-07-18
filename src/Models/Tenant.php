@@ -27,7 +27,7 @@ class Tenant extends Model
             config('multitenancy.tenant_foreign_key'),
             config('multitenancy.users_foreign_key')
         )
-        ->using(config('multitenancy.pivot_model'))
-        ->withTimestamps();
+            ->using(config('multitenancy.pivot_model'))
+            ->withTimestamps();
     }
 }
