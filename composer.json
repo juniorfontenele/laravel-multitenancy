@@ -55,9 +55,9 @@
         }
     },
     "scripts": {
-        "analyse": "vendor/bin/phpstan analyse",
+        "analyze": "vendor/bin/phpstan analyze",
         "format": "vendor/bin/pint",
-        "test": "vendor/bin/pest",
+        "test": "vendor/bin/pest --ci",
         "test-coverage": "vendor/bin/pest --coverage",
         "post-root-package-install": [
             "@php configure.php"
