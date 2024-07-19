@@ -15,7 +15,9 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/support": "~11"
+        "illuminate/support": "~11",
+        "juniorfontenele/laravel-activestate": "^1.0",
+        "juniorfontenele/laravel-hascreator": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -23,8 +25,8 @@
         "laravel/framework": "^11",
         "laravel/pint": "^1.16",
         "laravel/tinker": "^2.9",
+        "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.1",
-        "orchestra/testbench": "^9.2",
         "pestphp/pest": "^2.34",
         "pestphp/pest-plugin-arch": "^2.7",
         "pestphp/pest-plugin-laravel": "^2.4",
@@ -48,9 +50,6 @@
         "laravel": {
             "providers": [
                 "JuniorFontenele\\LaravelMultitenancy\\Providers\\LaravelMultitenancyServiceProvider"
-            ],
-            "dont-discover": [
-                "*"
             ]
         }
     },
@@ -61,6 +60,10 @@
         "test-coverage": "vendor/bin/pest --coverage",
         "post-root-package-install": [
             "@php configure.php"
+        ],
+        "lint": [
+            "@format",
+            "@analyze"
         ]
     },
     "config": {
