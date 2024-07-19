@@ -4,21 +4,22 @@ namespace JuniorFontenele\LaravelMultitenancy\Tests;
 
 use Illuminate\Config\Repository;
 use Illuminate\Database\Schema\Blueprint;
-use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use Illuminate\Encryption\Encrypter;
+use Illuminate\Foundation\Testing\TestCase as LaravelTestCase;
+use Illuminate\Support\Facades\Artisan;
+use JuniorFontenele\LaravelMultitenancy\Tests\Models\User;
 
-use function Orchestra\Testbench\workbench_path;
-
-class TestCase extends OrchestraTestCase
+abstract class TestCase extends LaravelTestCase
 {
-    protected $enablesPackageDiscoveries = false;
-
-    protected bool $loadWorkbenchMigrations = false;
-
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->defineEnvironment($this->app);
+
         $this->setUpDatabase($this->app);
+
+        $this->runMigrations($this->app);
     }
 
     protected function tearDown(): void
@@ -26,15 +27,11 @@ class TestCase extends OrchestraTestCase
         parent::tearDown();
     }
 
-    /**
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return array
-     */
-    protected function getPackageProviders($app)
+    protected function generateRandomKey($app)
     {
-        return [
-            \JuniorFontenele\LaravelMultitenancy\Providers\LaravelMultitenancyServiceProvider::class,
-        ];
+        return 'base64:'.base64_encode(
+            Encrypter::generateKey($app['config']['app.cipher'])
+        );
     }
 
     /**
@@ -45,7 +42,8 @@ class TestCase extends OrchestraTestCase
     protected function defineEnvironment($app)
     {
         // Setup environment, like app configuration
-        tap($app['config'], function (Repository $config) {
+        tap($app['config'], function (Repository $config) use ($app) {
+            $config->set('app.key', $this->generateRandomKey($app));
             $config->set('app.timezone', 'UTC');
             $config->set('app.locale', 'en');
             $config->set('app.fallback_locale', 'en');
@@ -57,6 +55,8 @@ class TestCase extends OrchestraTestCase
                 'prefix' => '',
             ]);
         });
+
+        $app->bind('App\Models\User', User::class);
     }
 
     /**
@@ -76,15 +76,14 @@ class TestCase extends OrchestraTestCase
         });
     }
 
-    protected function defineDatabaseMigrations()
+    /**
+     * Run migrations.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     */
+    protected function runMigrations($app)
     {
-        if (! $this->loadWorkbenchMigrations) {
-            return;
-        }
-
-        $this->loadMigrationsFrom(
-            workbench_path('database/migrations')
-        );
+        Artisan::call('migrate:fresh');
     }
 
     protected function getLaravelVersion()
