@@ -97,14 +97,14 @@ abstract class TestCase extends LaravelTestCase
     protected function createTenant(): Tenant
     {
         return Tenant::create([
-            'name' => fake()->name,
+            'name' => fake()->company(),
         ]);
     }
 
     protected function createUser(): User
     {
         return User::create([
-            'email' => fake()->email,
+            'email' => fake()->unique()->safeEmail(),
         ]);
     }
 

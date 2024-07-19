@@ -30,7 +30,7 @@ class Tenant extends Model
                 config('multitenancy.users_foreign_key')
             )
             ->using(config('multitenancy.pivot_model'))
-            ->withPivot(config('activestate.column_name'), config('creator.column_name'))
+            ->withPivot(config('hascreator.column_name'))
             ->withTimestamps();
     }
 

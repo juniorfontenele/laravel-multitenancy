@@ -35,7 +35,6 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->creator();
-            $table->activeState();
             $table->timestamps();
         });
     }

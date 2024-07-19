@@ -30,6 +30,8 @@ class TenantTest extends TestCase
             'user_id' => $user->id,
         ]);
 
+        $this->assertTrue($user->tenants->contains($tenant));
+
         $tenant->removeUser($user);
 
         $this->assertDatabaseMissing(config('multitenancy.pivot_table_name'), [
