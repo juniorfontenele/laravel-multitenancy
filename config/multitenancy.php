@@ -7,6 +7,10 @@ return [
 
     'tenant_foreign_key' => 'tenant_id',
 
+    'hosts_model' => \JuniorFontenele\LaravelMultitenancy\Models\TenantHost::class,
+
+    'hosts_table_name' => 'tenant_hosts',
+
     'users_model' => \App\Models\User::class,
 
     'users_foreign_key' => 'user_id',

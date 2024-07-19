@@ -7,6 +7,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Foundation\Testing\TestCase as LaravelTestCase;
 use Illuminate\Support\Facades\Artisan;
+use JuniorFontenele\LaravelMultitenancy\Models\Tenant;
+use JuniorFontenele\LaravelMultitenancy\Models\TenantHost;
 use JuniorFontenele\LaravelMultitenancy\Tests\Models\User;
 
 abstract class TestCase extends LaravelTestCase
@@ -73,6 +75,7 @@ abstract class TestCase extends LaravelTestCase
         $schema->create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email');
+            $table->timestamps();
         });
     }
 
@@ -89,5 +92,26 @@ abstract class TestCase extends LaravelTestCase
     protected function getLaravelVersion()
     {
         return (float) app()->version();
+    }
+
+    protected function createTenant(): Tenant
+    {
+        return Tenant::create([
+            'name' => fake()->name,
+        ]);
+    }
+
+    protected function createUser(): User
+    {
+        return User::create([
+            'email' => fake()->email,
+        ]);
+    }
+
+    protected function createHost(Tenant $tenant): TenantHost
+    {
+        return $tenant->hosts()->create([
+            'host' => fake()->domainName(),
+        ]);
     }
 }
